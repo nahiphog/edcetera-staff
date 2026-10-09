@@ -9,5 +9,8 @@
   },
   "devDependencies": {
     "vite": "latest"
+  },
+  "dependencies": {
+    "jspdf": "latest"
   }
 }
