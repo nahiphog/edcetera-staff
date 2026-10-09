@@ -29,6 +29,7 @@ const receiptFields = [
   ["cashChq", "Cash / chq no.", "text"],
   ["tel", "Tel. no.", "tel"],
   ["bankTransfer", "Bank transfer", "text"],
+  ["authorisedBy", "Authorised by (above company footer)", "text"],
 ];
 
 function decodeJwt(token) {
@@ -146,7 +147,7 @@ function renderReceipt(data) {
         <div class="receipt-two-column">${line("Tel. no.", value("tel"))}${line("Bank transfer", value("bankTransfer"))}</div>
       </div>
     </div>
-    <div class="receipt-signature-line" aria-hidden="true"><span>for PJ SPEECH &amp; DRAMA CENTRE SDN BHD</span></div><div class="receipt-footer">for PJ SPEECH &amp; DRAMA CENTRE SDN BHD</div>`;
+    <div class="receipt-signature-value">${escapeHtml(value("authorisedBy"))}</div><div class="receipt-signature-line" aria-hidden="true"><span>for PJ SPEECH &amp; DRAMA CENTRE SDN BHD</span></div><div class="receipt-footer">for PJ SPEECH &amp; DRAMA CENTRE SDN BHD</div>`;
 }
 
 function pdfLine(doc, label, value, x, y, width, isBold = true, fontSize = 7) {
@@ -255,6 +256,7 @@ async function addReceiptPageImage(doc, data) {
   field("cashChq", 160, 114.5, 43);
   field("tel", 66, 122.5, 63);
   field("bankTransfer", 164, 122.5, 39);
+  field("authorisedBy", 130, 132, 73);
 
   if (!data.get("showNotice")) {
     doc.setFillColor(255, 255, 255);
